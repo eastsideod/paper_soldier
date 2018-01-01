@@ -1,0 +1,10 @@
+build
+paper_soldier-source/mono/ActivityLog
+paper_soldier-source/mono/bin
+paper_soldier-source/mono/obj
+paper_soldier-source/src/paper_soldier_object.h
+paper_soldier-source/src/paper_soldier_object.py
+paper_soldier-source/src/object_model/*.h
+paper_soldier-source/src/object_model/*.cc
+paper_soldier-source/src/object_model/*.cs
+paper_soldier-source/mono/paper_soldier.userprefs
