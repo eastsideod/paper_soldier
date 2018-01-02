@@ -8,6 +8,8 @@
 # NOTE: IF YOU HAVE MORE SOURCE FILES, ADD HERE.
 set(
   ADDITIONAL_CPP_SOURCES
+  servers/server.cc
+  servers/server.h
   event_handlers.cc
   event_handlers.h
   ${PROJECT_NAME}_server.cc
