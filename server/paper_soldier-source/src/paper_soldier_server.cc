@@ -4,6 +4,7 @@
 #include <funapi.h>
 #include <gflags/gflags.h>
 
+#include "event_handlers.h"
 #include "paper_soldier_object.h"
 
 // You can differentiate game server flavors.
@@ -16,6 +17,7 @@ DEFINE_bool(example_arg5, false, "example flag");
 
 namespace {
 
+const WallClock::Duration kOneSecond = WallClock::FromMsec(1000);
 
 class PaperSoldierServer : public Component {
  public:
@@ -26,24 +28,42 @@ class PaperSoldierServer : public Component {
     // Do not touch this, unless you fully understand what you are doing.
     paper_soldier::ObjectModelInit();
 
-    if (not InstallMonoServer("PaperSoldier.Server", arguments)) {
-      return false;
-    }
+    /*
+     * Parameters specified in the "arguments" section in your MANIFEST.json
+     * will be passed in the variable "arguments".
+     * So, you can give configuration data to your game server.
+     *
+     * Example:
+     *
+     * We have in MANIFEST.json "example_arg1" and "example_arg2" that
+     * have a string value and an integer value, respectively.
+     * So, you can access the arguments like below:
+     */
+    string arg1 = arguments.FindStringArgument("example_arg1");
+    LOG(INFO) << "example_arg1: " << arg1;
+
+    int64_t arg2 = arguments.FindIntegerArgument("example_arg2");
+    LOG(INFO) << "example_arg2: " << arg2;
+
+     // You can override gflag like this: ./paper_soldier-local --example_arg3=hahaha
+    LOG(INFO) << "example_arg3: " << FLAGS_example_arg3;
+
+
+    /*
+     * Registers various handlers.
+     * You may be interesed in this function and handlers in it.
+     * Please see "event_handlers.cc"
+     */
+    paper_soldier::RegisterEventHandlers();
 
     return true;
   }
 
   static bool Start() {
-    if (not StartMonoServer()) {
-      return false;
-    }
     return true;
   }
 
   static bool Uninstall() {
-    if (not UninstallMonoServer()) {
-      return false;
-    }
     return true;
   }
 };

@@ -24,7 +24,7 @@ project(paper_soldier CXX C)
 set(PROJECT_NAME_CAMEL_CASE PaperSoldier)
 
 # Sets Mono project.
-set(IS_MONO_PROJECT true)
+set(IS_MONO_PROJECT false)
 set(MONO_DLL_NAME PaperSoldier.dll)
 
 # Sets USE_CCACHE if you have installed ccache and want to leverage it.
