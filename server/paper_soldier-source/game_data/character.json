@@ -1,0 +1,23 @@
+[
+  {
+    "Index": 0,
+    "Name": "Chracter0",
+    "Gold": "100",
+    "Cash": "0",
+    "Description": "description character 0"
+  },
+  {
+    "Index": 1,
+    "Name": "Chracter1",
+    "Gold": "200",
+    "Cash": "0",
+    "Description": "description character 1"
+  },
+  {
+    "Index": 2,
+    "Name": "Chracter2",
+    "Gold": "200",
+    "Cash": "0",
+    "Description": "description character 2"
+  }
+]
