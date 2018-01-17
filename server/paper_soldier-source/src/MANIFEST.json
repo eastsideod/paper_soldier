@@ -2,6 +2,13 @@
   "version": 1,
   "components": [
     {
+      "name": "Party",
+      "arguments": {
+      },
+      "dependency": {
+      }
+    },
+    {
       "name": "PaperSoldierServer",
       "arguments": {
         "example_arg1": "val1",
@@ -36,12 +43,12 @@
             "internal_threads_size": 4
           },
           "SessionService": {
-            "tcp_json_port": 8012,
+            "tcp_json_port": 0,
             "udp_json_port": 0,
-            "http_json_port": 8018,
+            "http_json_port": 0,
             "websocket_json_port": 0,
-            "tcp_protobuf_port": 0,
-            "udp_protobuf_port": 0,
+            "tcp_protobuf_port": 8012,
+            "udp_protobuf_port": 8013,
             "http_protobuf_port": 0,
             "websocket_protobuf_port": 0,
             "session_timeout_in_second" : 300,
@@ -253,7 +260,8 @@
               // "moon": {
               // }
             }
-          }
+          },
+          "Party":{}
       },
       "library": "libpaper_soldier.so"
     }
