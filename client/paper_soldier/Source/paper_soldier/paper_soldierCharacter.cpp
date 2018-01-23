@@ -1,13 +1,19 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
-#include "PaperSoldier.h"
-#include "Kismet/HeadMountedDisplayFunctionLibrary.h"
-#include "PaperSoldierCharacter.h"
+#include "paper_soldierCharacter.h"
+#include "HeadMountedDisplayFunctionLibrary.h"
+#include "Camera/CameraComponent.h"
+#include "Components/CapsuleComponent.h"
+#include "Components/InputComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Controller.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Common/ps_utils.h"
 
 //////////////////////////////////////////////////////////////////////////
-// APaperSoldierCharacter
+// Apaper_soldierCharacter
 
-APaperSoldierCharacter::APaperSoldierCharacter()
+Apaper_soldierCharacter::Apaper_soldierCharacter()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -45,61 +51,61 @@ APaperSoldierCharacter::APaperSoldierCharacter()
 //////////////////////////////////////////////////////////////////////////
 // Input
 
-void APaperSoldierCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
+void Apaper_soldierCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
-	PlayerInputComponent->BindAxis("MoveForward", this, &APaperSoldierCharacter::MoveForward);
-	PlayerInputComponent->BindAxis("MoveRight", this, &APaperSoldierCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("MoveForward", this, &Apaper_soldierCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &Apaper_soldierCharacter::MoveRight);
 
 	// We have 2 versions of the rotation bindings to handle different kinds of devices differently
 	// "turn" handles devices that provide an absolute delta, such as a mouse.
 	// "turnrate" is for devices that we choose to treat as a rate of change, such as an analog joystick
 	PlayerInputComponent->BindAxis("Turn", this, &APawn::AddControllerYawInput);
-	PlayerInputComponent->BindAxis("TurnRate", this, &APaperSoldierCharacter::TurnAtRate);
+	PlayerInputComponent->BindAxis("TurnRate", this, &Apaper_soldierCharacter::TurnAtRate);
 	PlayerInputComponent->BindAxis("LookUp", this, &APawn::AddControllerPitchInput);
-	PlayerInputComponent->BindAxis("LookUpRate", this, &APaperSoldierCharacter::LookUpAtRate);
+	PlayerInputComponent->BindAxis("LookUpRate", this, &Apaper_soldierCharacter::LookUpAtRate);
 
 	// handle touch devices
-	PlayerInputComponent->BindTouch(IE_Pressed, this, &APaperSoldierCharacter::TouchStarted);
-	PlayerInputComponent->BindTouch(IE_Released, this, &APaperSoldierCharacter::TouchStopped);
+	PlayerInputComponent->BindTouch(IE_Pressed, this, &Apaper_soldierCharacter::TouchStarted);
+	PlayerInputComponent->BindTouch(IE_Released, this, &Apaper_soldierCharacter::TouchStopped);
 
 	// VR headset functionality
-	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &APaperSoldierCharacter::OnResetVR);
+	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &Apaper_soldierCharacter::OnResetVR);
 }
 
 
-void APaperSoldierCharacter::OnResetVR()
+void Apaper_soldierCharacter::OnResetVR()
 {
 	UHeadMountedDisplayFunctionLibrary::ResetOrientationAndPosition();
 }
 
-void APaperSoldierCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
+void Apaper_soldierCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		Jump();
 }
 
-void APaperSoldierCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
+void Apaper_soldierCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
 		StopJumping();
 }
 
-void APaperSoldierCharacter::TurnAtRate(float Rate)
+void Apaper_soldierCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
-void APaperSoldierCharacter::LookUpAtRate(float Rate)
+void Apaper_soldierCharacter::LookUpAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
-void APaperSoldierCharacter::MoveForward(float Value)
+void Apaper_soldierCharacter::MoveForward(float Value)
 {
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
@@ -113,10 +119,11 @@ void APaperSoldierCharacter::MoveForward(float Value)
 	}
 }
 
-void APaperSoldierCharacter::MoveRight(float Value)
+void Apaper_soldierCharacter::MoveRight(float Value)
 {
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
+		PS_ASSERT(false);
 		// find out which way is right
 		const FRotator Rotation = Controller->GetControlRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);

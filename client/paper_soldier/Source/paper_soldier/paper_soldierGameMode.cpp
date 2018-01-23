@@ -1,10 +1,10 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
-#include "PaperSoldier.h"
-#include "PaperSoldierGameMode.h"
-#include "PaperSoldierCharacter.h"
+#include "paper_soldierGameMode.h"
+#include "paper_soldierCharacter.h"
+#include "UObject/ConstructorHelpers.h"
 
-APaperSoldierGameMode::APaperSoldierGameMode()
+Apaper_soldierGameMode::Apaper_soldierGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));

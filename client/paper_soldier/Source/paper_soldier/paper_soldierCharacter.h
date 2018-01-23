@@ -1,10 +1,13 @@
-// Copyright 1998-2017 Epic Games, Inc. All Rights Reserved.
+// Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
+
 #pragma once
+
+#include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "PaperSoldierCharacter.generated.h"
+#include "paper_soldierCharacter.generated.h"
 
 UCLASS(config=Game)
-class APaperSoldierCharacter : public ACharacter
+class Apaper_soldierCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
@@ -16,7 +19,7 @@ class APaperSoldierCharacter : public ACharacter
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
 public:
-	APaperSoldierCharacter();
+	Apaper_soldierCharacter();
 
 	/** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
